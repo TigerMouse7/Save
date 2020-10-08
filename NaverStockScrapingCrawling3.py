@@ -29,7 +29,7 @@ html = driver.page_source
 soup =BeautifulSoup(html, 'lxml')
 
 while pageNum < lastPage:
-    driver.get(f'https://news.naver.com/main/list.nhn?mode=LS2D&sid2=258&sid1=101&mid=shm&date={nowDate}&page=')
+    driver.get(f'https://news.naver.com/main/list.nhn?mode=LS2D&sid2=258&sid1=101&mid=shm&date={nowDate}&page={pageNum}')
     headlines = driver.find_element_by_class_name('type06_headline').find_elements_by_tag_name('dt')
     heads = driver.find_element_by_class_name('type06').find_elements_by_tag_name('dt')
 
@@ -37,7 +37,7 @@ while pageNum < lastPage:
 
     for item in headlines:
         num += 1
-        print(item.text.strip())
+        print(pageNum, item.text.strip())
 
         excel_sheet.cell(row=num, column=1).value= (item.text)
 
